@@ -6,16 +6,18 @@ endif
 syntax keyword iopKeyword interface abstract package import
 syntax keyword iopComplexType class enum union struct module
 syntax keyword iopKeyword in out throw typedef static
-syntax keyword iopBooleanTrue    true
-syntax keyword iopBooleanFalse   false
+syntax keyword iopBooleanTrue true
+syntax keyword iopBooleanFalse false
 syntax keyword iopBasicTypes int uint long ulong xml
 syntax keyword iopBasicTypes byte ubyte short ushort void
 syntax keyword iopBasicTypes bool double string bytes
 syntax keyword iopTodos TODO FIXME XXX TBD NOTE
 
+" complex types name
+syntax match iopComlexTypeName  contained /(\s*)?(?<=[class|enum|union|struct]\s)\K[^\s]([a-zA-Z0-9]*)(?=\s:|\s{)/
 " comments
 syntax keyword iopCommentTodo contained TODO FIXME XXX TBD NOTE
-syntax region  iopComment start=+/\*+  end=+\*/+ contains=iopCommentTodo,@Spell fold extend keepend
+syntax region iopComment start=+/\*+  end=+\*/+ contains=iopCommentTodo,@Spell fold extend keepend
 
 " decorators
 syntax match   iopDecorator /^\s*@/ nextgroup=iopDecoratorFunction
@@ -34,12 +36,16 @@ syntax match iopOperator /(<<\|>>)/
 syntax match iopTag  "^[0-9]*:"
 
 " iop open & close
-syntax match iopBrackets "\[\]\|{\|}"
+syntax match iopOpenBraces /{/
+syntax match iopCloseBraces /}/
+syntax match iopBrackets "\[\]"
 
 " highlights
 highlight link iopDecorator Special
 highlight link iopTag Identifier
 highlight link iopBrackets Identifier
+highlight link iopOpenBraces Identifier
+highlight link iopCloseBraces Identifier
 highlight link iopDecoratorFunction Function
 highlight link iopComment Comment
 highlight link iopKeyword Keyword
@@ -52,5 +58,5 @@ highlight link iopNumber Number
 highlight link iopDouble Double
 highlight link iopString String
 highlight link iopOperator Operator
-
+highlight link iopComlexTypeName Type
 let b:current_syntax = "iop"
