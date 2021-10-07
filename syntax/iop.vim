@@ -27,7 +27,7 @@ syntax match   iopDouble  /\c\<\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%(e[+-]\=\d\+\)\=
 syntax region  iopString  start=+"\|c"+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
 
 " operators
-syntax match iopOperator /[-+%<>!&:]/
+syntax match iopOperator /[=<>&:?]/
 syntax match iopOperator /(<<\|>>)/
 
 " iop tags
