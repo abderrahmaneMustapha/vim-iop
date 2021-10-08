@@ -8,8 +8,8 @@ set expandtab
 
 :let maplocalleader = "\\"
 :inoremap { {<CR><CR>};<up><tab>
-:inoremap ( ()
-:inoremap " ""
+:inoremap ( ()<left>
+:inoremap " ""<left>
 :inoremap ; ;<CR><CR>
 :inoremap # /* {{{  */ <CR><CR><CR><CR>/* }}} */<CR><up><up><up><up><up><right><right><right><right><right><right><right>
 :inoremap <localleader>c class <name> : 25xxx : <parent_class> {<CR><CR>};<CR><up><up><up><right><right><right><right><right><right>
