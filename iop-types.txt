@@ -1,0 +1,15 @@
+static
+int
+uint
+long
+ulong
+xml
+byte
+ubyte
+short
+ushort
+void
+bool
+double
+string
+bytes

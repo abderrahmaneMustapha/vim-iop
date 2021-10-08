@@ -1,7 +1,3 @@
-package
-import
-module
-typedef
 @strict
 @max
 @min
@@ -22,12 +18,3 @@ typedef
 @prefix
 @nowarn
 @alias
-abstract
-local
-enum
-union
-struct
-class
-interface
-abstract
-typedef
