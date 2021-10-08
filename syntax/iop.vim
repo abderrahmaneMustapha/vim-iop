@@ -4,7 +4,7 @@ endif
 
 " basic keywords and types
 syntax keyword iopKeyword interface abstract package import
-syntax keyword iopComplexType class enum union struct module
+syntax keyword iopComplexType class enum union struct module nextgroup=iopComlexTypeName skipwhite
 syntax keyword iopKeyword in out throw typedef static
 syntax keyword iopBooleanTrue true
 syntax keyword iopBooleanFalse false
@@ -14,7 +14,7 @@ syntax keyword iopBasicTypes bool double string bytes
 syntax keyword iopTodos TODO FIXME XXX TBD NOTE
 
 " complex types name
-syntax match iopComlexTypeName  contained /(\s*)?(?<=[class|enum|union|struct]\s)\K[^\s]([a-zA-Z0-9]*)(?=\s:|\s{)/
+syntax match iopComlexTypeName  "\w\+" contained
 " comments
 syntax keyword iopCommentTodo contained TODO FIXME XXX TBD NOTE
 syntax region iopComment start=+/\*+  end=+\*/+ contains=iopCommentTodo,@Spell fold extend keepend
