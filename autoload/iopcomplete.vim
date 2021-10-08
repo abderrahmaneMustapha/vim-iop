@@ -1,12 +1,12 @@
-let s:matches=readfile(expand('~/.vim/iop.txt'))
-let s:types=readfile(expand('~/.vim/iop-types.txt'))
-let s:decorators=readfile(expand('~/.vim/iop-deco.txt'))
-let s:values=readfile(expand('~/.vim/iop-values.txt'))
+let s:matches=readfile(expand('~/.vim/text/iop.txt'))
+let s:types=readfile(expand('~/.vim/text/iop-types.txt'))
+let s:decorators=readfile(expand('~/.vim/text/iop-deco.txt'))
+let s:values=readfile(expand('~/.vim/text/iop-values.txt'))
 
 function! FindParent(line_num)
     let prevline = prevnonblank(a:line_num-1)
     while prevline > -1 && indent(prevline)>0
-         let prevline = prevnonblank(prevline-1)        
+         let prevline = prevnonblank(prevline-1)
     endwhile
     if prevline > -1
         let line = getline(prevline)
