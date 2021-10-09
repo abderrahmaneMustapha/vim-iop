@@ -7,7 +7,7 @@ set shiftwidth=4
 set expandtab
 
 :let maplocalleader = "\\"
-:inoremap { {<CR><CR>}<up><tab>
+:inoremap { {<CR><tab><CR><bs><bs><bs><bs>}<up><tab>
 :inoremap ( ()<left>
 :inoremap " ""<left>
 :inoremap ; ;<CR><CR>
