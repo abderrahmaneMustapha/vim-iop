@@ -38,6 +38,9 @@ function! iopcomplete#CompleteIOP(findstart, base)
         let matches = FindParent(line_num)
         " find classes matching "a:base"
         let res = []
+        if stridx(line, "typedef") > -1
+           let matches = s:types[1:]
+        endif
         for m in matches
             if m =~ '^' . a:base && stridx(line, "static") == -1 || m !="static" && index(s:decorators, m) == -1
                 call add(res, m)
