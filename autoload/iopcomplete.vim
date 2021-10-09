@@ -42,8 +42,10 @@ function! iopcomplete#CompleteIOP(findstart, base)
            let matches = s:types[1:]
         endif
         for m in matches
-            if m =~ '^' . a:base && stridx(line, "static") == -1 || m !="static" && index(s:decorators, m) == -1
-                call add(res, m)
+            if m =~ '^' . a:base
+               if stridx(line, "static") == -1 || m !="static" && index(s:decorators, m) == -1
+                    call add(res, m)
+               endif
             endif
         endfor
         return res
