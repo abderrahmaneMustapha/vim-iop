@@ -6,7 +6,7 @@ let s:values=readfile(expand('~/.vim/iop-values.txt'))
 function! FindParent(line_num)
     let prevline = prevnonblank(a:line_num-1)
     while prevline > -1 && indent(prevline)>0
-         let prevline = prevnonblank(prevline-1)        
+         let prevline = prevnonblank(prevline-1)
     endwhile
     if prevline > -1
         let line = getline(prevline)
