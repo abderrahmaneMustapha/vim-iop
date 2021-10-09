@@ -1,4 +1,4 @@
-let s:matches=readfile(expand('~/.vim/text/iop.txt'))
+let s:iops=readfile(expand('~/.vim/text/iop.txt'))
 let s:types=readfile(expand('~/.vim/text/iop-types.txt'))
 let s:decorators=readfile(expand('~/.vim/text/iop-deco.txt'))
 let s:values=readfile(expand('~/.vim/text/iop-values.txt'))
@@ -11,16 +11,16 @@ function! FindParent(line_num)
     if prevline > -1
         let line = getline(prevline)
         if stridx(line, "interface") > -1
-            return "interface"
+            return s:values
         endif
         if stridx(line, "enum") > -1
-            return "enum"
+            return []
         endif
         if stridx(line, "class") > -1 || stridx(line, "struct") > -1
-            return "types"
+            return s:types+s:decorators
         endif
     endif
-    return -1
+    return s:iops+s:decorators
 endfun
 
 function! iopcomplete#CompleteIOP(findstart, base)
@@ -35,34 +35,14 @@ function! iopcomplete#CompleteIOP(findstart, base)
     else
         let line_num = line('.')
         let idt = indent(line_num)
+        let matches = FindParent(line_num)
         " find classes matching "a:base"
         let res = []
-        let parent = FindParent(line_num)
-        if idt > 0 && stridx(line, "static") > -1 && parent == "types"
-            for m in s:types
-                if m =~ '^' . a:base && m !="static"
-                    call add(res, m)
-                endif
-            endfor
-        elseif idt > 0 && parent == "types"
-            for m in s:types+s:decorators
-                if m =~ '^' . a:base
-                    call add(res, m)
-                endif
-            endfor
-        elseif idt > 0 && parent == "interface"
-            for m in s:values
-                if m =~ '^' . a:base
-                    call add(res, m)
-                endif
-            endfor
-        elseif parent != "enum"
-            for m in s:matches
-                if m =~ '^' . a:base
-                    call add(res, m)
-                endif
-            endfor
-        endif
+        for m in matches
+            if m =~ '^' . a:base && stridx(line, "static") == -1 || m !="static" && index(s:decorators, m) == -1
+                call add(res, m)
+            endif
+        endfor
         return res
     endif
 endfun
